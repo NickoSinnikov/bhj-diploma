@@ -1,6 +1,3 @@
-const { response } = require("express");
-const res = require("express/lib/response");
-
 /**
  * Класс User управляет авторизацией, выходом и
  * регистрацией пользователя из приложения
