@@ -27,6 +27,9 @@ const createRequest = (options = {}) => {
             xhr.open(options.method, options.url);
             xhr.send(formData);
         }
+        if (xhr.readyState === xhr.DONE && xhr.status === 200) {
+            options.callback(null, response);
+        }
     } catch (err) {
         options.callback(err);
     }
