@@ -17,8 +17,7 @@ class TransactionsWidget {
     }
     this.element = element;
 
-    AccountsWidget.registerEvents();
-    AccountsWidget.update();
+    this.registerEvents();
   }
   /**
    * Регистрирует обработчики нажатия на

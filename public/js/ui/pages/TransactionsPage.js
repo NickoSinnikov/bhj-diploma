@@ -32,14 +32,13 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-    let removeAccount = this.element.querrySelector('.remove-account');
-    removeAccount.addEventListener('click', (event) => {
+    let removeAccount = this.element.querySelector('.remove-account');
+    removeAccount.addEventListener('click', () => {
       this.removeAccount();
     });
 
-    let transactionRemove = this.element.querrySelector('.transaction__remove');
-    transactionRemove.addEventListener('click', (event) => {
-      this.removeAccount(e.target.closest('.transaction__remove'));
+    this.element.addEventListener('click', (event) => {
+      event.target.closest('.transaction__remove');
     });
   }
 
@@ -124,7 +123,7 @@ class TransactionsPage {
    * */
   formatDate(date) {
     let inputDate = new Date(date);
-    let date = inputDate.toLocaleString('ru', {
+    let dateYMD = inputDate.toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -133,7 +132,7 @@ class TransactionsPage {
       hour: 'numeric',
       minute: 'numeric',
     });
-    return `${date} в ${time}`;
+    return `${dateYMD} в ${time}`;
   }
 
   /**

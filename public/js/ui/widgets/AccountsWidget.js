@@ -19,8 +19,8 @@ class AccountsWidget {
     }
     this.element = element;
 
-    AccountsWidget.registerEvents();
-    AccountsWidget.update();
+    this.registerEvents();
+    this.update();
   }
 
   /**
