@@ -39,7 +39,7 @@ class User {
       method: 'GET',
       data: this.current(),
       callback: (err, response) => {
-        if (response.success == true) {
+        if (response.success) {
           this.setCurrent(response.user);
         } else {
           this.unsetCurrent();
@@ -63,8 +63,8 @@ class User {
       callback: (err, response) => {
         if (response && response.user) {
           this.setCurrent(response.user);
-          callback();
         }
+        callback(err, response);
       },
     });
   }
@@ -84,7 +84,7 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
-        callback();
+        callback(err, response);
       },
     });
   }
@@ -97,11 +97,11 @@ class User {
     createRequest({
       url: this.URL + '/logout',
       method: 'POST',
-      callback: (response) => {
+      callback: (err, response) => {
         if (response) {
           this.unsetCurrent();
-          callback();
         }
+        callback(err, response);
       },
     });
   }

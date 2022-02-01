@@ -23,12 +23,12 @@ const createRequest = (options = {}) => {
       xhr.send();
     } else {
       xhr.open(options.method, options.url);
-      xhr.send(options.data);
+      xhr.send(formData);
     }
 
-    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-      options.callback(null, response);
-    }
+    xhr.onload = function () {
+      options.callback(null, xhr.response);
+    };
   } catch (err) {
     options.callback(err);
   }

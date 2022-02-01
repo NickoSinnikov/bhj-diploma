@@ -20,18 +20,16 @@ class CreateTransactionForm extends AsyncForm {
     let accountsSelect = this.element.querySelector('.accounts-select');
     let currentUser = User.current();
     if (currentUser) {
-      let dataUser = {
-        mail: currentUser.email,
-        password: currentUser.password,
-      };
-      Account.list(dataUser, (response) => {
-        this.select.innerHTML = '';
-        response.data.map((item) => {
-          this.select.insertAdjacentHTML(
-            'beforeEnd',
-            `<option value="${item.id}">${item.name}</option>`
-          );
-        });
+      Account.list({}, (err, response) => {
+        if (response.success) {
+          accountsSelect.innerHTML = '';
+          response.data.forEach((item) => {
+            accountsSelect.insertAdjacentHTML(
+              'beforeEnd',
+              `<option value="${item.id}">${item.name}</option>`
+            );
+          });
+        }
       });
     }
   }
@@ -45,7 +43,8 @@ class CreateTransactionForm extends AsyncForm {
   onSubmit(data) {
     Transaction.create(data, (response) => {
       this.element.reset();
-      new Modal(this.element.closest('.modal')).close();
+      App.getModal('newIncome').close();
+      App.getModal('newExpense').close();
       App.update();
     });
   }
